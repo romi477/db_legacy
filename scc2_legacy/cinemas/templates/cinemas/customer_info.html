@@ -1,0 +1,8 @@
+{% extends 'cinemas/base.html' %}
+
+{% block content %}
+    <h3>{{ customer.name }} [{{ customer.iso }}]</h3>
+    {% for c in cinema %}
+        <p><a href="{{ Cinema.get_absolute_url }}">{{ c.title }}  [{{c.creation}}]</a></p>
+    {% endfor %}
+{% endblock %}

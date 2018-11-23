@@ -1,0 +1,12 @@
+{% extends 'cinemas/base.html' %}
+
+{% block content %}
+
+    {% for customer in all_customers %}
+        <li>
+            <a href="{{ customer.get_absolute_url }}">{{ customer.name }}  [{{ customer.iso }}]</a>
+        </li>
+        {% endfor %}
+    {% include 'cinemas/pagination.html' %}
+
+{% endblock %}
