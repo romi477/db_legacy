@@ -20,10 +20,13 @@ class ProductsList(generic.ListView):
 
 class ProductInfo(generic.DetailView):
     model = Cinema
-    # context_object_name = 'product_info'
-    # template_name = 'cinemas/product_info.html'
-    # queryset = Cinema.objects.all()
-    #
+    template_name = 'cinemas/product_info.html'
+    context_object_name = 'product'
+    pk_url_kwarg = 'uniqueid'
+
+    def get_object(self, queryset=None):
+        obj = super(ProductInfo, self).get_object(queryset=queryset)
+        return obj
 
 
 class CustomersList(generic.ListView):

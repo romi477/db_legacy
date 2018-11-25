@@ -31,7 +31,7 @@ class Cinema(models.Model):
     wide_tag = models.CharField(max_length=25, null=True, blank=True)
     narrow_tag = models.CharField(max_length=25, null=True, blank=True)
     title = models.CharField(max_length=25, unique=True)
-    slug_field = models.SlugField(max_length=15, blank=True, null=True)
+    slug = models.SlugField(max_length=15, unique=True, db_index=True, editable=True, null=True, blank=True)
     uniqueid = models.CharField(max_length=36, verbose_name='UID')
     ownervalue = models.IntegerField()
     creation = models.DateField()
@@ -46,4 +46,4 @@ class Cinema(models.Model):
 
     def get_absolute_url(self):
         # return reverse('narrow_tag_list', kwargs={'narrow_tag': self.narrow_tag})
-        return f'{self.slug_field}'
+        return f'{self.owner.iso}/{self.owner.name}/{self.uniqueid}'

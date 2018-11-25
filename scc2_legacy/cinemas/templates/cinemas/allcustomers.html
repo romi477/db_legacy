@@ -2,9 +2,9 @@
 
 {% block content %}
 
-    {% for customer in all_customers %}
+    {% for c in all_customers %}
         <li>
-            <a href="{{ customer.get_absolute_url }}">{{ customer.name }}  [{{ customer.iso }}]</a>
+            <a href="{{ c.get_absolute_url }}">{{ c.name }}  [{{ c.iso }}]</a>
         </li>
         {% endfor %}
     {% include 'cinemas/pagination.html' %}

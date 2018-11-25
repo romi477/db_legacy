@@ -3,9 +3,9 @@
 
 {% block content %}
 
-    {% for product in all_products %}
+    {% for p in all_products %}
         <li>
-            <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+            <a href="{{ p.get_absolute_url }}">{{ p.title }}</a>
         </li>
     {% endfor %}
     {% include 'cinemas/pagination.html' %}

@@ -1,11 +1,8 @@
 {% extends 'cinemas/base.html' %}
 
     {% block content %}
-        {% for p in product %}
-            <p>{{ p.title }}</p>
-            <p>{{ p.creation }}</p>
-            <p>{{ p.uniqueid }}</p>
-            <p>{{ p.ownervalue }}</p>
-            <p>----------------</p>
-        {% endfor %}
+        <p>{{ product.title }}</p>
+        <p>{{ product.creation }}</p>
+        <p>{{ product.uniqueid }}</p>
+        <p>{{ product.ownervalue }}</p>
     {% endblock %}

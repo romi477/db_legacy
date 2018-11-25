@@ -1,4 +1,5 @@
 import json
+from collections import Counter
 
 
 def disassemble_title(json_obj):
@@ -33,10 +34,18 @@ def update_slug(json_obj):
     json_obj['fields']['slug_field'] = st.lower()
     return json_obj
 
+def update2_slug(json_obj):
+    json_obj['fields']['slug_field'] = json_obj['fields']['slug_field'] + json_obj['fields']['uniqueid'][-13:]
+    return json_obj
+
+def update_slug_key(json_obj):
+    json_obj['fields']['slug'] = json_obj['fields'].pop('slug_field')
+
+
 
 def main():
 
-    cinema_file = r'..\scc2_legacy\cinemas\fixtures\cinemas4.json'
+    cinema_file = r'..\scc2_legacy\cinemas\fixtures\cinemas7.json'
     customer_file = r'..\scc2_legacy\cinemas\fixtures\customers.json'
 
     with open(cinema_file, 'r') as f:
@@ -52,11 +61,17 @@ def main():
     #
     # customers_list_serialize = [serialize_customers(i) for i in set(customers_list)]
 
-    for j in cinema_json_obj:
-        update_slug(j)
+    # for j in cinema_json_obj:
+    #     update_slug(j)
 
-    with open(r'..\scc2_legacy\cinemas\fixtures\cinemas5.json', 'w') as f:
-        json.dump(cinema_json_obj, f, indent=2)
+    # for j in cinema_json_obj:
+    #     update2_slug(j)
+
+    # for j in cinema_json_obj:
+    #     update_slug_key(j)
+    #
+    # with open(r'..\scc2_legacy\cinemas\fixtures\cinemas7.json', 'w') as f:
+    #     json.dump(cinema_json_obj, f, indent=2)
 
 
 if __name__=='__main__':
