@@ -1,6 +1,12 @@
 {% extends 'cinemas/base.html' %}
 
     {% block content %}
+        {% for i in custom_list %}
+            {% if i.name == product.owner.name and i.iso == product.owner.iso %}
+                <a href="{{ i.get_absolute_url }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+
         <p>{{ product.title }}</p>
         <p>{{ product.creation }}</p>
         <p>{{ product.uniqueid }}</p>

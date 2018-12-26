@@ -23,7 +23,7 @@ class Customer(models.Model):
         return (self.iso, self.name)
 
     def get_absolute_url(self):
-        return f'{self.iso}/{self.name}'
+        return reverse('customer_info', kwargs={'iso': self.iso, 'name': self.name})
 
 
 class Cinema(models.Model):
@@ -31,7 +31,7 @@ class Cinema(models.Model):
     wide_tag = models.CharField(max_length=25, null=True, blank=True)
     narrow_tag = models.CharField(max_length=25, null=True, blank=True)
     title = models.CharField(max_length=25, unique=True)
-    slug = models.SlugField(max_length=15, unique=True, db_index=True, editable=True, null=True, blank=True)
+    slug = models.SlugField(max_length=30, unique=True, db_index=True, editable=True)
     uniqueid = models.CharField(max_length=36, verbose_name='UID')
     ownervalue = models.IntegerField()
     creation = models.DateField()
@@ -45,5 +45,4 @@ class Cinema(models.Model):
         return f'{self.title}  [{self.creation}]'
 
     def get_absolute_url(self):
-        # return reverse('narrow_tag_list', kwargs={'narrow_tag': self.narrow_tag})
-        return f'{self.owner.iso}/{self.owner.name}/{self.uniqueid}'
+        return reverse('product_info', kwargs={'iso': self.owner.iso, 'name': self.owner.name, 'slug': self.slug})

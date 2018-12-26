@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Cinema, Customer
 from django.views import generic
 
+
 def index(request):
     p = Cinema.objects.all()
     lst = []
@@ -9,6 +10,7 @@ def index(request):
         if i.wide_tag not in lst:
             lst.append(i.wide_tag)
     return render(request, 'cinemas/index.html', context={'lst': lst})
+
 
 
 class ProductsList(generic.ListView):
@@ -22,11 +24,11 @@ class ProductInfo(generic.DetailView):
     model = Cinema
     template_name = 'cinemas/product_info.html'
     context_object_name = 'product'
-    pk_url_kwarg = 'uniqueid'
 
-    def get_object(self, queryset=None):
-        obj = super(ProductInfo, self).get_object(queryset=queryset)
-        return obj
+    def get_context_data(self, **kwargs):
+        context = super(ProductInfo, self).get_context_data(**kwargs)
+        context['custom_list'] = Customer.objects.all()
+        return context
 
 
 class CustomersList(generic.ListView):
@@ -40,11 +42,6 @@ def customer_info(request, iso, name):
     cus = Customer.objects.get(iso__iexact=iso, name__iexact=name)
     cin = Cinema.objects.filter(owner__name__iexact=name, owner__iso__iexact=iso)
     return render(request, 'cinemas/customer_info.html', context={'customer': cus, 'cinema': cin})
-
-def narrow_tag_list(request, narrow_tag):
-    narrow_tag_list = Cinema.objects.filter(narrow_tag__iexact=narrow_tag)
-    return render(request, 'cinemas/wide_tag_list.html', context={'narrow_tag_list': narrow_tag_list})
-
 
 
 
