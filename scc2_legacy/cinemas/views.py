@@ -18,7 +18,8 @@ class ProductsList(generic.ListView):
     context_object_name = 'all_products'
     template_name = 'cinemas/allproducts.html'
     queryset = Cinema.objects.all()
-    paginate_by = 35
+    paginate_by = 20
+
 
 class ProductInfo(generic.DetailView):
     model = Cinema
@@ -36,7 +37,7 @@ class CustomersList(generic.ListView):
     context_object_name = 'all_customers'
     template_name = 'cinemas/allcustomers.html'
     queryset = Customer.objects.all()
-    paginate_by = 35
+    paginate_by = 20
 
 def customer_info(request, iso, name):
     cus = Customer.objects.get(iso__iexact=iso, name__iexact=name)

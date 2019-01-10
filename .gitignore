@@ -1,6 +1,7 @@
 .idea/
 venv/
 parse_db/
+scc2_legacy/scc2_legacy/__pycache__/
 scc2_legacy/cinemas/fixtures/
 scc2_legacy/cinemas/migrations/
 scc2_legacy/db.sqlite3
