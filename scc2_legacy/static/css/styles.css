@@ -1,10 +1,30 @@
 
-
 .btn-light {
-    border: 3px solid #500;
+    border: 1px solid #999;
     margin-left: 14px;
 }
 
 .navbar-brand {
-    background: red;
+    background: ;
+}
+
+.pagination {
+    margin-left: auto;
+    margin-right: auto;
+    width: 30em;
+}
+
+.active {
+    background: ;
+}
+
+iframe {
+    display: block;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.breadcrumb {
+    padding: 1px 16px;
+    breadcrumb-divider: quote(">");
 }

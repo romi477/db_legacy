@@ -1,14 +1,19 @@
 {% extends 'cinemas/base.html' %}
 
     {% block content %}
-        {% for i in custom_list %}
-            {% if i.name == product.owner.name and i.iso == product.owner.iso %}
-                <a href="{{ i.get_absolute_url }}">{{ i }}</a>
+        <div class="list-group">
+
+        {% for customer in custom_list %}
+            {% if customer.name == product.owner.name and customer.iso == product.owner.iso %}
+                <a href="{{ customer.get_absolute_url }}" class="list-group-item list-group-item-action active">{{ customer }}</a>
             {% endif %}
         {% endfor %}
 
-        <p>{{ product.title }}</p>
-        <p>{{ product.creation }}</p>
-        <p>{{ product.uniqueid }}</p>
-        <p>{{ product.ownervalue }}</p>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{ product.title }}</li>
+        <li class="list-group-item">{{ product.uniqueid }}</li>
+        <li class="list-group-item">{{ product.ownervalue }}</li>
+        <li class="list-group-item">{{ product.creation }}</li>
+        </ul>
+        </div>
     {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'cinemas/base.html' %}
+
+
+{% block content %}
+<div class="card-columns">
+    {% for product in wide_product_list %}
+        <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{ product|upper }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">...</h6>
+                <p class="card-text">Short description</p>
+                <a href="{% url 'products_narrow' w_tag=product %}" class="card-link">look more</a>
+              </div>
+
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

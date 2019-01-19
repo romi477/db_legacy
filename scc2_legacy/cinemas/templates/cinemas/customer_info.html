@@ -1,8 +1,12 @@
 {% extends 'cinemas/base.html' %}
 
 {% block content %}
-<h3><a href="{{ customer.get_absolute_url }}">{{ customer }}</a></h3>
+<div class="list-group">
+<a href="{{ customer.get_absolute_url }}" class="list-group-item list-group-item-action active">{{ customer }}</a>
     {% for c in cinema %}
-        <p><a href="{{ c.get_absolute_url }}">{{ c.title }}</a></p>
+    <li class="list-group-item">
+        <a href="{{ c.get_absolute_url }}">{{ c.title }}</a>
+    </li>
     {% endfor %}
+</div>
 {% endblock %}

@@ -4,12 +4,24 @@ from django.views import generic
 
 
 def index(request):
-    p = Cinema.objects.all()
-    lst = []
-    for i in p:
-        if i.wide_tag not in lst:
-            lst.append(i.wide_tag)
-    return render(request, 'cinemas/index.html', context={'lst': lst})
+
+    return render(request, 'cinemas/index.html')
+
+def wide_tag_view(request):
+    queryset = Cinema.objects.values('wide_tag')
+    wide_tag_list = [i['wide_tag'] for i in queryset]
+    return render(request, 'cinemas/products_wide_tag.html', context={'wide_product_list': set(wide_tag_list)})
+
+
+def narrow_tag_view(request, w_tag):
+    queryset = Cinema.objects.values('wide_tag', 'narrow_tag')
+    narrow_tag_list = [i['narrow_tag'] for i in queryset if i['wide_tag'] == w_tag]
+    return render(request, 'cinemas/products_narrow_tag.html', context={'narrow_product_list': set(narrow_tag_list), 'wtag': w_tag})
+
+def product_list(request, w_tag, n_tag):
+    queryset = Cinema.objects.values('title', 'narrow_tag')
+    prod_list = [i['title'] for i in queryset if i['narrow_tag'] == n_tag]
+    return render(request, 'cinemas/product_list.html', context={'product_list': prod_list})
 
 
 

@@ -4,9 +4,11 @@
 {% block content %}
 
     {% for p in all_products %}
-        <li>
+        <ul class="list-group">
+        <li class="list-group-item">
             <a href="{{ p.get_absolute_url }}">{{ p.title }}</a>
         </li>
+        </ul>
     {% endfor %}
     {% include 'cinemas/pagination.html' %}
 
