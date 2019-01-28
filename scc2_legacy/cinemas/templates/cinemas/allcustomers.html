@@ -1,5 +1,15 @@
 {% extends 'cinemas/base.html' %}
 
+{% block breadcrumb %}
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">customers</li>
+      </ol>
+    </nav>
+
+{% endblock %}
+
 {% block content %}
 
     {% for customer in all_customers %}

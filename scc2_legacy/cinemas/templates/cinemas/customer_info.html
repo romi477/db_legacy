@@ -1,12 +1,40 @@
 {% extends 'cinemas/base.html' %}
 
-{% block content %}
-<div class="list-group">
-<a href="{{ customer.get_absolute_url }}" class="list-group-item list-group-item-action active">{{ customer }}</a>
-    {% for c in cinema %}
-    <li class="list-group-item">
-        <a href="{{ c.get_absolute_url }}">{{ c.title }}</a>
-    </li>
-    {% endfor %}
-</div>
+{% block breadcrumb %}
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'all_customers' %}">customers</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'customers_iso' %}">iso</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'customers_name' iso=customer.iso %}">{{ customer.iso|lower }}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ customer.name|lower }}</li>
+      </ol>
+    </nav>
+
 {% endblock %}
+
+{% block content %}
+
+    <div class="card text-center">
+        <div class="card-header">
+            <strong>{{ customer.name }} [{{ customer.iso }}]
+                <a href="{% url 'customer_edit' iso=customer.iso name=customer.name %}" style="margin-left: 10px;">
+                <small>edit</small></a>
+                <a href="{% url 'customer_delete' iso=customer.iso name=customer.name %}" style="margin-left: 10px;">
+                <small>delete</small></a>
+            </strong>
+        </div>
+        <div class="list-group">
+           {% for cinema in cinemas %}
+            <a href="{{ cinema.get_absolute_url }}" class="list-group-item list-group-item-action disabled">{{ cinema }}</a>
+           {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+

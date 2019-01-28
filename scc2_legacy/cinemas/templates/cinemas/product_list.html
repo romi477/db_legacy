@@ -1,13 +1,31 @@
 {% extends 'cinemas/base.html' %}
 
+{% block breadcrumb %}
 
-{% block content %}
-<div class="list-group">
-    {% for product in product_list %}
-        <li class="list-group-item">
-        <a href="{{ product.get_absolute_url }}">{{ product }}</a>
-        </li>
-    {% endfor %}
-</div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'all_products' %}">products</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'product_types' %}">types</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'product_subtypes' type=type %}">subtypes</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ subtype|lower }}</li>
+      </ol>
+    </nav>
 
 {% endblock %}
+
+{% block content %}
+
+    <div class="card-columns">
+        {% for product in product_list %}
+            <div class="card text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product }}</h5>
+                    <a href="{{ product.get_absolute_url }}" class="btn btn-success">more detail</a>
+                </div>
+            </div>
+         {% endfor %}
+    </div>
+
+{% endblock %}
+
+

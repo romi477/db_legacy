@@ -1,11 +1,19 @@
-
 .btn-light {
     border: 1px solid #999;
     margin-left: 14px;
 }
 
-.navbar-brand {
-    background: ;
+.btn-success {
+    background-color: MediumSeaGreen;
+    opacity: 0.8;
+}
+
+.list-group {
+    color: MediumSeaGreen;
+}
+
+.card {
+    margin: 25px;
 }
 
 .pagination {
@@ -14,8 +22,8 @@
     width: 30em;
 }
 
-.active {
-    background: ;
+.pagination a {
+    color: grey;
 }
 
 iframe {
@@ -26,5 +34,33 @@ iframe {
 
 .breadcrumb {
     padding: 1px 16px;
-    breadcrumb-divider: quote(">");
+}
+
+.breadcrumb-item a {
+    color: MediumSeaGreen;
+}
+
+.list-group-item a {
+    color: MediumSeaGreen;
+}
+
+.form-group {
+    width: 500px;
+    margin: auto;
+}
+
+.btn-outline-success {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.card-header a {
+    color: MediumSeaGreen;
+}
+
+.btn-block {
+    width: 500px;
+    margin-top: 16px;
+    margin-left: auto;
+    margin-right: auto;
 }

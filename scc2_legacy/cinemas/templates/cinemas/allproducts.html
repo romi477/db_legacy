@@ -1,15 +1,25 @@
 {% extends 'cinemas/base.html' %}
 
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+          {% if search_query %}
+              {{ query_string }}
+          {% else %}
+              products
+          {% endif %}
+          </li>
+      </ol>
+    </nav>
+{% endblock %}
 
 {% block content %}
-
-    {% for p in all_products %}
-        <ul class="list-group">
-        <li class="list-group-item">
-            <a href="{{ p.get_absolute_url }}">{{ p.title }}</a>
-        </li>
-        </ul>
+    <div class="card text-center">
+    {% for product in all_products %}
+        <a href="{{ product.get_absolute_url }}" class="list-group-item list-group-item-action disabled">{{ product.title }}</a>
     {% endfor %}
+    </div>
     {% include 'cinemas/pagination.html' %}
-
 {% endblock %}
+

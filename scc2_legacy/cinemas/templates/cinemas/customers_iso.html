@@ -1,0 +1,28 @@
+{% extends 'cinemas/base.html' %}
+
+{% block breadcrumb %}
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'all_customers' %}">customers</a></li>
+          <li class="breadcrumb-item active" aria-current="page">iso</li>
+      </ol>
+    </nav>
+
+{% endblock %}
+
+{% block content %}
+    <div class="card-columns">
+        {% for iso in customers_iso_list %}
+
+            <div class="card border-success mb-3" style="max-width: 5rem; text-align: center;">
+                <a href="{% url 'customers_name' iso=iso %}" class="list-group-item list-group-item-action">
+                    {{ iso }}
+                </a>
+            </div>
+
+        {% endfor %}
+    </div>
+{% endblock %}
+
+

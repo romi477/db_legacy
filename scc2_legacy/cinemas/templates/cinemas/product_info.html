@@ -1,19 +1,41 @@
 {% extends 'cinemas/base.html' %}
 
-    {% block content %}
-        <div class="list-group">
+{% block breadcrumb %}
 
-        {% for customer in custom_list %}
-            {% if customer.name == product.owner.name and customer.iso == product.owner.iso %}
-                <a href="{{ customer.get_absolute_url }}" class="list-group-item list-group-item-action active">{{ customer }}</a>
-            {% endif %}
-        {% endfor %}
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'all_products' %}">products</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'product_types' %}">types</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'product_subtypes' type=product.type %}">subtypes</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'product_list' type=product.type subtype=product.subtype %}">{{ product.subtype|lower }}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ product.title|lower }}</li>
+      </ol>
+    </nav>
 
-        <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{ product.title }}</li>
-        <li class="list-group-item">{{ product.uniqueid }}</li>
-        <li class="list-group-item">{{ product.ownervalue }}</li>
-        <li class="list-group-item">{{ product.creation }}</li>
-        </ul>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="card text-center">
+        <div class="card-header">
+            {{ product.owner.name }} [{{ product.owner.iso }}]
+            <a href="{% url 'product_edit' type=product.type subtype=product.subtype slug=product.slug %}" style="margin-left: 10px;">
+                <small>edit</small></a>
+                <a href="{% url 'product_delete' type=product.type subtype=product.subtype slug=product.slug %}" style="margin-left: 10px;">
+                <small>delete</small></a>
         </div>
-    {% endblock %}
+        <div class="card-body">
+            <h5 class="card-title"><strong>{{ product.title }}</strong></h5>
+            <p class="card-text">{{ product.ownervalue }}</p>
+            <p class="card-text">{{ product.uniqueid }}</p>
+            <a href="{% url 'customer_info' iso=product.owner.iso name=product.owner.name %}" class="btn btn-success">all customer equipment</a>
+        </div>
+        <div class="card-footer text-muted">
+            {{ product.creation }}
+        </div>
+    </div>
+
+{% endblock %}
+
+

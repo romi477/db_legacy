@@ -1,0 +1,9 @@
+{% extends 'cinemas/base.html' %}
+
+
+{% block content %}
+    {% for k, v in d %}
+        <p>{{ k }} -- {{ v }}</p>
+    {% endfor %}
+
+{% endblock %}

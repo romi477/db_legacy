@@ -15,6 +15,7 @@ class Customer(models.Model):
 
     class Meta:
         unique_together = ('iso', 'name')
+        ordering = ['iso']
 
     def __str__(self):
         return f'{self.name}  [{self.iso}]'
@@ -28,13 +29,14 @@ class Customer(models.Model):
 
 class Cinema(models.Model):
     owner = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
-    wide_tag = models.CharField(max_length=25, null=True, blank=True)
-    narrow_tag = models.CharField(max_length=25, null=True, blank=True)
+    family = models.CharField(max_length=10, null=True, blank=True)
+    type = models.CharField(max_length=25, null=True, blank=True)
+    subtype = models.CharField(max_length=25, null=True, blank=True)
     title = models.CharField(max_length=25, unique=True)
     slug = models.SlugField(max_length=30, unique=True, db_index=True, editable=True)
     uniqueid = models.CharField(max_length=36, verbose_name='UID')
     ownervalue = models.IntegerField()
-    creation = models.DateField()
+    creation = models.DateField(auto_now_add=True)
     notation = models.TextField(blank=True, null=True)
 
     class Meta:
@@ -42,7 +44,7 @@ class Cinema(models.Model):
         verbose_name = 'Product'
 
     def __str__(self):
-        return f'{self.title}  [{self.creation}]'
+        return self.title
 
     def get_absolute_url(self):
-        return reverse('product_info', kwargs={'iso': self.owner.iso, 'name': self.owner.name, 'slug': self.slug})
+        return reverse('product_info', kwargs={'type': self.type, 'subtype': self.subtype, 'slug': self.slug})

@@ -1,0 +1,17 @@
+{% extends 'cinemas/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+    <h3 style="text-align: center; color: MediumSeaGreen; margin-top: 16px;">Pick new object</h3>
+
+        <a href="{% url 'new_customer' %}" class="btn btn-outline-success btn-lg btn-block">Customer</a>
+        <a href="{% url 'new_cinema' %}" class="btn btn-outline-success btn-lg btn-block">Cinema</a>
+
+
+
+
+
+{% endblock %}
+

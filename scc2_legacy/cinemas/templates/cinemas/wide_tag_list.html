@@ -1,7 +1,0 @@
-{% extends 'cinemas/base.html' %}
-
-{% block content %}
-    {% for product in narrow_tag_list %}
-        <h6>{{ product.title }}    [{{ product.creation }}]</h6>
-    {% endfor %}
-{% endblock %}

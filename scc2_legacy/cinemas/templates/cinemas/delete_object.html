@@ -1,0 +1,19 @@
+{% extends 'cinemas/base.html' %}
+
+
+
+{% block content %}
+    <h3 style="text-align: center; color: MediumSeaGreen; margin-top: 16px;">{{ model }} removal</h3>
+
+        <form action="{{ model.get_absolute_url }}delete/" method="post" >
+            {% csrf_token %}
+            <h5 style="text-align: center; color: MediumSeaGreen;">Are you sure to delete {{ model }}?</h5>
+
+            <div class="col text-center">
+                <input type ="submit" class="btn btn-outline-danger" value ="Delete"/>
+                <a href="{{ model.get_absolute_url }}" class="btn btn-outline-success">Cancel</a>
+            </div>
+        </form>
+
+
+{% endblock %}
