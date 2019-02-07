@@ -28,7 +28,7 @@ class Customer(models.Model):
 
 
 class Cinema(models.Model):
-    owner = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.PROTECT)
     family = models.CharField(max_length=10, null=True, blank=True)
     type = models.CharField(max_length=25, null=True, blank=True)
     subtype = models.CharField(max_length=25, null=True, blank=True)

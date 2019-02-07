@@ -58,9 +58,17 @@ iframe {
     color: MediumSeaGreen;
 }
 
+.card-body a {
+    color: MediumSeaGreen;
+}
+
 .btn-block {
     width: 500px;
     margin-top: 16px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.btn-outline-info {
+    margin-left: 20px;
 }

@@ -8,7 +8,7 @@
           <li class="breadcrumb-item"><a href="{% url 'product_types' %}">types</a></li>
           <li class="breadcrumb-item"><a href="{% url 'product_subtypes' type=product.type %}">subtypes</a></li>
           <li class="breadcrumb-item"><a href="{% url 'product_list' type=product.type subtype=product.subtype %}">{{ product.subtype|lower }}</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{ product.title|lower }}</li>
+          <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
       </ol>
     </nav>
 
@@ -20,16 +20,30 @@
     <div class="card text-center">
         <div class="card-header">
             {{ product.owner.name }} [{{ product.owner.iso }}]
-            <a href="{% url 'product_edit' type=product.type subtype=product.subtype slug=product.slug %}" style="margin-left: 10px;">
-                <small>edit</small></a>
-                <a href="{% url 'product_delete' type=product.type subtype=product.subtype slug=product.slug %}" style="margin-left: 10px;">
-                <small>delete</small></a>
+            {% if user.is_authenticated and user.is_staff %}
+            <a href="{% url 'customer_edit' iso=product.owner.iso name=product.owner.name %}" style="margin-left: 10px;">
+                <small>edit</small>
+            </a>
+            <a href="{% url 'customer_delete' iso=product.owner.iso name=product.owner.name %}" style="margin-left: 10px;">
+                <small>delete</small>
+            </a>
+            {% endif %}
         </div>
         <div class="card-body">
-            <h5 class="card-title"><strong>{{ product.title }}</strong></h5>
+            <h5 class="card-title"><strong>{{ product.title }}</strong>
+                {% if user.is_authenticated and user.is_staff %}
+                <a href="{% url 'product_edit' type=product.type subtype=product.subtype slug=product.slug %}" style="margin-left: 10px;">
+                <small>edit</small>
+                </a>
+                <a href="{% url 'product_delete' type=product.type subtype=product.subtype slug=product.slug %}" style="margin-left: 10px;">
+                <small>delete</small>
+                </a>
+                {% endif %}
+            </h5>
+
             <p class="card-text">{{ product.ownervalue }}</p>
             <p class="card-text">{{ product.uniqueid }}</p>
-            <a href="{% url 'customer_info' iso=product.owner.iso name=product.owner.name %}" class="btn btn-success">all customer equipment</a>
+            <a href="{% url 'customer_info' iso=product.owner.iso name=product.owner.name %}" class="btn btn-outline-success">all customer equipment</a>
         </div>
         <div class="card-footer text-muted">
             {{ product.creation }}
@@ -37,5 +51,6 @@
     </div>
 
 {% endblock %}
+
 
 

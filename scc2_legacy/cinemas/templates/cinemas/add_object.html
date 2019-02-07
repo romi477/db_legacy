@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <h3 style="text-align: center; color: MediumSeaGreen; margin-top: 16px;">Add customer</h3>
+    <h3 style="text-align: center; color: MediumSeaGreen; margin-top: 16px;">Add {{ object_name }}</h3>
 
         <form action="{% url object_url %}" method="post" >
             {% csrf_token %}

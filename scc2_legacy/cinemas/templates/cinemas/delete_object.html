@@ -3,7 +3,7 @@
 
 
 {% block content %}
-    <h3 style="text-align: center; color: MediumSeaGreen; margin-top: 16px;">{{ model }} removal</h3>
+    <h3 style="text-align: center; color: MediumSeaGreen; margin-top: 16px;">Object removal:</h3>
 
         <form action="{{ model.get_absolute_url }}delete/" method="post" >
             {% csrf_token %}
@@ -14,6 +14,5 @@
                 <a href="{{ model.get_absolute_url }}" class="btn btn-outline-success">Cancel</a>
             </div>
         </form>
-
 
 {% endblock %}

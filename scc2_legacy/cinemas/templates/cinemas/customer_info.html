@@ -6,8 +6,8 @@
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{% url 'all_customers' %}">customers</a></li>
           <li class="breadcrumb-item"><a href="{% url 'customers_iso' %}">iso</a></li>
-          <li class="breadcrumb-item"><a href="{% url 'customers_name' iso=customer.iso %}">{{ customer.iso|lower }}</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{ customer.name|lower }}</li>
+          <li class="breadcrumb-item"><a href="{% url 'customers_name' iso=customer.iso %}">{{ customer.iso }}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ customer.name }}</li>
       </ol>
     </nav>
 
@@ -17,12 +17,15 @@
 
     <div class="card text-center">
         <div class="card-header">
-            <strong>{{ customer.name }} [{{ customer.iso }}]
+            <strong>{{ customer.name }} [{{ customer.iso }}]</strong>
+                {% if user.is_authenticated and user.is_staff %}
                 <a href="{% url 'customer_edit' iso=customer.iso name=customer.name %}" style="margin-left: 10px;">
-                <small>edit</small></a>
+                    <small>edit</small>
+                </a>
                 <a href="{% url 'customer_delete' iso=customer.iso name=customer.name %}" style="margin-left: 10px;">
-                <small>delete</small></a>
-            </strong>
+                    <small>delete</small>
+                </a>
+                {% endif %}
         </div>
         <div class="list-group">
            {% for cinema in cinemas %}

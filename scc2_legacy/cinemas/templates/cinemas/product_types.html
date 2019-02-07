@@ -13,13 +13,13 @@
 
 {% block content %}
 
-    <div class="card-columns">
+    <div class="card-columns text-center">
         {% for type in product_types_list %}
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title"><strong>{{ type|upper }}</strong></h5>
                     <p class="card-text">description..</p>
-                    <a href="{% url 'product_subtypes' type=type %}" class="btn btn-success">explore</a>
+                    <a href="{% url 'product_subtypes' type=type %}" class="btn btn-outline-success">explore</a>
                 </div>
             </div>
         {% endfor %}

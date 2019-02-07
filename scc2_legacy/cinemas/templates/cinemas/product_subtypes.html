@@ -14,13 +14,13 @@
 
 {% block content %}
 
-    <div class="card-columns">
+    <div class="card-columns text-center">
         {% for subtype in product_subtypes_list %}
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title"><strong>{{ subtype }}</strong></h5>
                     <p class="card-text">description..</p>
-                    <a href="{% url 'product_list' type=type subtype=subtype %}" class="btn btn-success">explore</a>
+                    <a href="{% url 'product_list' type=type subtype=subtype %}" class="btn btn-outline-success">explore</a>
                 </div>
             </div>
         {% endfor %}

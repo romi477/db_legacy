@@ -6,7 +6,7 @@
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{% url 'all_customers' %}">customers</a></li>
           <li class="breadcrumb-item"><a href="{% url 'customers_iso' %}">iso</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{ iso|lower }}</li>
+          <li class="breadcrumb-item active" aria-current="page">{{ iso }}</li>
       </ol>
     </nav>
 
@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><strong>{{ customer }}</strong></h5>
                     <p class="card-text">description..</p>
-                    <a href="{% url 'customer_info' iso=iso name=customer %}" class="btn btn-success">explore</a>
+                    <a href="{% url 'customer_info' iso=iso name=customer %}" class="btn btn-outline-success">explore</a>
                 </div>
             </div>
         {% endfor %}
