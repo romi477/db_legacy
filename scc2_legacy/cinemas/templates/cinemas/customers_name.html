@@ -14,13 +14,13 @@
 
 {% block content %}
 
-    <div class="card-columns">
+    <div class="card-columns text-center">
         {% for customer in customers_name_list %}
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title"><strong>{{ customer }}</strong></h5>
                     <p class="card-text">description..</p>
-                    <a href="{% url 'customer_info' iso=iso name=customer %}" class="btn btn-outline-success">explore</a>
+                    <a href="{% url 'customer_info' iso=iso name=customer.name %}" class="btn btn-outline-success">explore</a>
                 </div>
             </div>
         {% endfor %}

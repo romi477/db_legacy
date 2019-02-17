@@ -3,7 +3,7 @@
 {% block authorization %}
     {% if user.is_authenticated %}
         <script>
-            alert( '{{ user|upper }} is already authenticated...' );
+            alert('{{ user|upper }} is already authenticated...');
             window.location.href = {% url 'index' %};
         </script>
     {% else %}

@@ -1,9 +1,9 @@
-from django import forms
+from django.forms import ModelForm
 from .models import Customer, Cinema
 
 
 
-class CustomerForm(forms.ModelForm):
+class CustomerForm(ModelForm):
 
     class Meta:
         model = Customer
@@ -11,7 +11,7 @@ class CustomerForm(forms.ModelForm):
 
 
 
-class CinemaForm(forms.ModelForm):
+class CinemaForm(ModelForm):
 
     class Meta:
         model = Cinema

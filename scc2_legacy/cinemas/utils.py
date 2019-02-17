@@ -18,7 +18,7 @@ class ObjectCreateMixin:
         if bound_form.is_valid():
             obj = bound_form.save()
             return redirect(obj)
-        return HttpResponse('Bound form is not valid')
+        return HttpResponse('Bound form is not valid, maybe this object has already exist')
 
 
 class ObjectEditMixin:

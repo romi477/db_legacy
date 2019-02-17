@@ -1,6 +1,6 @@
 from .models import Cinema, Customer
-from . import forms
-from .utils import *
+from .forms import CustomerForm, CinemaForm
+from .utils import ObjectCreateMixin, ObjectEditMixin, ObjectDeleteMixin
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
@@ -18,28 +18,24 @@ def index(request):
     return render(request, 'cinemas/index.html')
 
 def product_types_view(request):
-    queryset = Cinema.objects.values('type')
-    product_types_list = sorted(set([i['type'] for i in queryset]))
-    return render(request, 'cinemas/product_types.html', context={'product_types_list': product_types_list})
+    types = sorted(set(Cinema.objects.values_list('type', flat=True)))
+    return render(request, 'cinemas/product_types.html', {'product_types_list': types})
 
 def product_subtypes_view(request, type):
-    queryset = Cinema.objects.values('type', 'subtype')
-    product_subtypes_list = sorted(set([i['subtype'] for i in queryset if i['type'] == type]))
-    return render(request, 'cinemas/product_subtypes.html', context={'product_subtypes_list': product_subtypes_list, 'type': type})
+    product_subtypes_list = sorted(set(Cinema.objects.filter(type=type).values_list('subtype', flat=True)))
+    return render(request, 'cinemas/product_subtypes.html', {'product_subtypes_list': product_subtypes_list, 'type': type})
 
 def product_list_view(request, type, subtype):
     product_list = Cinema.objects.filter(type=type, subtype=subtype).order_by('title')
-    return render(request, 'cinemas/product_list.html', context={'product_list': product_list, 'type': type, 'subtype': subtype})
+    return render(request, 'cinemas/product_list.html', {'product_list': product_list, 'type': type, 'subtype': subtype})
 
 def customers_iso_view(request):
-    queryset = Customer.objects.values('iso')
-    customers_iso_list = sorted(set([i['iso'] for i in queryset]))
-    return render(request, 'cinemas/customers_iso.html', context={'customers_iso_list': customers_iso_list})
+    customers_iso_list = sorted(set(Customer.objects.values_list('iso', flat=True)))
+    return render(request, 'cinemas/customers_iso.html', {'customers_iso_list': customers_iso_list})
 
 def customers_name_view(request, iso):
-    queryset = Customer.objects.values('iso', 'name')
-    customers_name_list = sorted([i['name'] for i in queryset if i['iso'] == iso])
-    return render(request, 'cinemas/customers_name.html', context={'customers_name_list': customers_name_list, 'iso': iso})
+    customers_name_list = set(Customer.objects.filter(iso=iso).order_by('name'))
+    return render(request, 'cinemas/customers_name.html', {'customers_name_list': customers_name_list, 'iso': iso})
 
 
 class ProductsList(ListView):
@@ -81,14 +77,14 @@ class CustomerInfo(View):
     def get(self, request, iso, name):
         customer = get_object_or_404(Customer, iso=iso, name=name)
         cinemas = Cinema.objects.filter(owner__name__iexact=name, owner__iso__iexact=iso)
-        return render(request, 'cinemas/customer_info.html', context={'customer': customer, 'cinemas': cinemas})
+        return render(request, 'cinemas/customer_info.html', {'customer': customer, 'cinemas': cinemas})
 
 
 def pick_object(request):
     return render(request, 'cinemas/pick_object.html', {})
 
 class CreateCustomer(LoginRequiredMixin, PermissionRequiredMixin, ObjectCreateMixin, View):
-    model_form = forms.CustomerForm
+    model_form = CustomerForm
     object_name = 'Customer'
     object_url = 'new_customer'
     permission_required = 'cinemas.create_customer'
@@ -97,7 +93,7 @@ class CreateCustomer(LoginRequiredMixin, PermissionRequiredMixin, ObjectCreateMi
 
 class EditCustomer(LoginRequiredMixin, PermissionRequiredMixin, ObjectEditMixin, View):
     model = Customer
-    model_form = forms.CustomerForm
+    model_form = CustomerForm
     permission_required = 'cinemas.edit_customer'
     raise_exception = True
 
@@ -109,7 +105,7 @@ class DeleteCustomer(LoginRequiredMixin, PermissionRequiredMixin, ObjectDeleteMi
 
 
 class CreateCinema(LoginRequiredMixin, PermissionRequiredMixin, ObjectCreateMixin, View):
-    model_form = forms.CinemaForm
+    model_form = CinemaForm
     object_name = 'Product'
     object_url = 'new_product'
     permission_required = 'cinemas.create_cinema'
@@ -118,7 +114,7 @@ class CreateCinema(LoginRequiredMixin, PermissionRequiredMixin, ObjectCreateMixi
 
 class EditCinema(LoginRequiredMixin, PermissionRequiredMixin, ObjectEditMixin, View):
     model = Cinema
-    model_form = forms.CinemaForm
+    model_form = CinemaForm
     permission_required = 'cinemas.edit_cinema'
     raise_exception = True
 
